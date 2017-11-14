@@ -534,7 +534,6 @@
 
         var d = new Date();
         var y = d.getFullYear();
-        var y = d.getFullYear();
 
         for(var i=(y-10); i<(y+10); i++){
           $("#sel_year").append('<option value="'+i+'">'+i+'年</option>');
@@ -542,6 +541,32 @@
 
         $("#addsomeevent").click(function(){
 
+        });
+
+        $('#sel_year').change(function (){
+            _calendar_changesel();
+        });
+        $('#sel_month').change(function (){
+            _calendar_changesel();
+        });
+
+        $('#back2today').click(function(){
+            inittoday();
+        });
+
+        $('#week_detail').on('click', '.date', function () {
+          var $this = $(this);
+          var selectedDom = null;
+          __calendar_todayInfo = calendar.solar2lunar($this.data('year'), $this.data('month'), $this.data('date'));
+          drawdetail($this.data('year'), $this.data('month') - 1);
+          if(0 !== $this.data('current')){
+            var selectedId = _calendar_changesel($this.data('date'));
+            selectedDom = $('#daylist' + selectedId);
+          } else {
+            selectedDom = $this;
+          }
+          $('#week_detail .date-choosed').removeClass('date-choosed');
+          selectedDom.addClass('date-choosed');
         });
 
         inittoday();
@@ -552,15 +577,16 @@
         var d = new Date();
         var y = d.getFullYear();
         var m = d.getMonth();
-        drawdaylist(y,m);
+        console.log(y, m);
+        drawdaylist(y, m);
     }
 
     //选择年 选择月  这个月份都是 -1 的
-    function _calendar_changesel(){
-
+    function _calendar_changesel(sd){
         var y = $('#sel_year').val();
         var m = $('#sel_month').val();
-        drawdaylist(y,m);
+        var d = sd || -1;
+        return drawdaylist(y, m, d);
     }
 
     //打印log
@@ -573,7 +599,12 @@
 
 
     //
-    function drawdaylist(SY,SM){
+    function drawdaylist(SY, SM, SD){
+
+        SY = parseInt(SY, 10);
+        SM = parseInt(SM, 10);
+        SD = parseInt(SD, 10);
+        var selectedDay = null;
         
         var d = new Date(SY,SM,1);
 
@@ -622,7 +653,7 @@
 
         /*** 补充尾部 start ***/
         for (var i = alldays.length;  ; i++) {
-            if(i%7==0){
+            if(i%7==0 && i/7 != 4){
                 break;
             }
             var dd = new Date(f_day_s+86400*(i+1-day_seq)*1000);
@@ -651,7 +682,7 @@
 
             if(alldays[i].current!=0){
 
-                tmp+= ' date-pn';
+                tmp+= ' date date-pn';
 
             }else{
                 tmp+=' date';
@@ -677,34 +708,30 @@
                 divs = [];
             }
        }
-       $("#week_detail").html(boxs.join(''));
+        $("#week_detail").html(boxs.join(''));
+        $("#week_detail").attr('data-line', boxs.length);
 
-        
-      
-
-      drawdetail(SY,SM);
-      for (var i = 0; i < alldays.length; i++) {
-
-          $("#daylist"+i).click(function(){
-
-              var id=$(this).attr("id");
-              var ii = id.substring(7);
-              var dayinfo = alldays[ii];
-              __calendar_todayInfo = calendar.solar2lunar(dayinfo.y,dayinfo.m,dayinfo.d);
-              drawdetail(dayinfo.y,dayinfo.m-1);
-              if(dayinfo.current!=0){
-                _calendar_changesel();
-              }
-              //$(this).attr('class','click-today');
-          });
-      }
-
+        drawdetail(SY,SM);
+        for (var i = 0; i < alldays.length; i++) {
+          var tmp = $("#daylist"+i);
+          tmp.data('year', alldays[i].y);
+          tmp.data('month', alldays[i].m);
+          tmp.data('date', alldays[i].d);
+          tmp.data('current', alldays[i].current);
+          console.log('Insert:', alldays[i].y,alldays[i].m,alldays[i].d);
+          console.log('Compare:', SY,SM + 1,SD);
+          if (alldays[i].y === SY &&
+              alldays[i].m === (SM + 1) &&
+              alldays[i].d === SD) {
+            selectedDay = i;
+          }
+        }
+      return selectedDay;
     }
 
     
 
     function drawdetail(y,m){
-
 
         var s =  __calendar_todayInfo.cYear+"-"+__calendar_todayInfo.cMonth+"-"+__calendar_todayInfo.cDay+" "+__calendar_todayInfo.ncWeek;
         $('#right_detail_date').html(s);
@@ -715,21 +742,8 @@
         s = __calendar_todayInfo.IMonthCn + __calendar_todayInfo.IDayCn  + "<br>  &nbsp;&nbsp;" + __calendar_todayInfo.gzYear + "年" + " 【"+__calendar_todayInfo.Animal+"年】" + "<br>" + __calendar_todayInfo.gzMonth + "月" + " " + __calendar_todayInfo.gzDay + "日";
         $('#right_detail_date_lunar').html(s);
 
-        
         $('#sel_year').val(y);
         $('#sel_month').val(m);
-
-
-        $('#sel_year').change(function (){
-            _calendar_changesel();
-        });
-        $('#sel_month').change(function (){
-            _calendar_changesel();
-        });
-
-        $('#back2today').click(function(){
-            inittoday();
-        });
 
         //document.getElementById('addsomeevent').onclick = addsomeevent;
     }

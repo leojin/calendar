@@ -1,12 +1,12 @@
 <meta charset="UTF-8" />
 <style type="text/css">
 html {
-    padding: 0;
+    padding: 5;
     margin: 0;
     border: 0;
 }
 body {
-    padding: 5px;
+    padding: 0;
     margin: 0;
     border: 0;
 }
@@ -163,10 +163,11 @@ ul, li {
     text-align: center;
     font-size: 14px;
     padding: 5px 0; 
-    border-left: 1px solid #fff;
+    border: 3px solid #fff;
+    margin-left: 1px;
 }
 .date:first-child {
-    border-left: none;
+    margin-left: 0;
 }
 .date:nth-child(6) .date-num,
 .date:nth-child(7) .date-num {
@@ -180,20 +181,26 @@ ul, li {
     text-align: center;
     font-size: 14px;
     padding: 5px 0; 
-    border-left: 1px solid #fff;
+    border: 3px solid rgb(240, 240, 240);
     background-color: rgb(240, 240, 240);
+}
+.date-pn:first-child {
+    margin-left: 0;
 }
 
 .date-num {
     font-weight: 700;
     color: #000;
+    line-height: 20px;
 }
 .date-ch {
     font-size: 12px;
     color: rgb(200, 200, 200);
     white-space: nowrap;
+    line-height: 19px;
 }
 .date-work {
+    border: 3px solid rgb(240, 240, 240);
     background-color: rgb(240, 240, 240);
     position: relative;
 }
@@ -215,8 +222,11 @@ ul, li {
     padding: 1px 2px;
     background-color: rgb(200, 200, 200);
     font-size: 12px;
+    left: -3px;
+    top: -3px;
 }
 .date-free {
+    border: 3px solid rgb(255, 236, 236);
     background-color: rgb(255, 236, 236);
     position: relative;
 }
@@ -229,23 +239,33 @@ ul, li {
     padding: 1px 2px;
     background-color: rgb(249, 45, 47);
     font-size: 12px;
+    left: -3px;
+    top: -3px;
 }
 .date-fest .date-ch {
     color: rgb(249, 45, 47);
 }
 
 
-.date-today,
-.date:hover {
+.date-today {
     background-color: rgb(252, 173, 35);
+    border: 3px solid rgb(252, 173, 35);
     position: relative;
 }
-.date-pn:hover .date-num,
+.date-choosed,
+.date:hover {
+    border: 3px solid rgb(252, 173, 35);
+}
 .date-today .date-num,
-.date-today .date-ch,
-.date:hover .date-num,
-.date:hover .date-ch {
+.date-today .date-ch{
     color: #fff !important;
+}
+/*精心计算的三元一次方程整数解*/
+div[data-line="5"] .box-date>div {
+    padding: 7px 0;
+}
+div[data-line="6"] .box-date>div {
+    padding: 2px 0;
 }
 </style>
     <div class="container" id="container">

@@ -12,6 +12,9 @@
   "background":{
     "scripts":["js/jquery.min.js"]
   },
+  "icons": {
+    "128": "css/icon.png"
+  },
   "permissions": [  
     "http://*/*",  
     "tabs"  
