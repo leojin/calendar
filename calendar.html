@@ -1,0 +1,361 @@
+<meta charset="UTF-8" />
+<style type="text/css">
+html {
+    padding: 0;
+    margin: 0;
+    border: 0;
+}
+body {
+    padding: 5px;
+    margin: 0;
+    border: 0;
+}
+input,
+select {
+    padding: 0;
+    margin: 0;
+    border: 0;
+    background: transparent;
+    -webkit-appearance:none;
+    appearance:none;
+    outline: none;
+}
+ul, li {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border: 0;
+}
+.container {
+    width: 400px;
+    border-top: 2px solid rgb(83, 159, 251);
+    border-right: 130px solid rgb(83, 159, 251);
+    border-left: 2px solid rgb(83, 159, 251);
+    border-bottom: 2px solid rgb(83, 159, 251);
+    padding: 10px;
+    position: relative;
+}
+.box-title {
+    display: -webkit-box;
+    display: box;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgb(83, 159, 251);
+}
+.input-item {
+    width: 100%;
+    -webkit-box-flex:1.0;
+    box-flex:1.0;
+    margin-right: 10px;
+    font-size: 14px;
+}
+.input-item:last-child {
+    margin-right: 0;
+}
+.input-select {
+    line-height: 30px;
+    width: 100%;
+    border: 1px solid rgb(200, 200, 200);
+    background-color: #fff;
+    cursor: pointer;
+    position: relative;
+}
+.input-select select {
+    text-align: left;
+    text-indent: 10px;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+.input-select:after {
+    content: ;
+}
+.input-button {
+    line-height: 30px;
+    width: 100%;
+    text-align: center;
+    border: 1px solid rgb(200, 200, 200);
+    background-color: rgb(240, 240, 240);
+    cursor: pointer;
+}
+.input-button input {
+    cursor: pointer;
+}
+.input-button:hover {
+    background-color: rgb(220, 220, 220);
+}
+.box-detail {
+    position: absolute;
+    top: 0;
+    right: -130px;
+    width: 110px;
+    padding: 10px;
+    color: #fff;
+    font-size: 12px;
+}
+.detail-date {
+    padding: 10px 0 20px 0;
+}
+.detail-num {
+    margin: 0 auto;
+    background-color: rgb(252, 173, 35);
+    width: 70px;
+    height: 70px;
+    text-align: center;
+    line-height: 70px;
+    font-size: 40px;
+    font-weight: 900;
+    box-shadow: 1px 1px 10px #555;
+}
+.detail-des {
+    padding: 10px 0;
+    text-align: center;
+    line-height: 25px;
+    border-bottom: 2px solid rgb(133, 189, 252);
+}
+.detail-prefer {
+    display: -webkit-box;
+    display: box;    
+}
+.detail-prefer > div {
+    width: 100%;
+    -webkit-box-flex:1.0;
+    box-flex:1.0;
+    text-align: center;
+}
+.detail-prefer-title {
+    font-size: 20px;
+    line-height: 40px;
+    text-shadow: 1px 1px 2px #555;
+}
+.detail-prefer li {
+    line-height: 20px;
+}
+.box-week {
+    display: -webkit-box;
+    display: box;
+    border-bottom: 1px solid rgb(200, 200, 200);
+}
+.box-week > div {
+    -webkit-box-flex:1.0;
+    box-flex:1.0;
+    text-align: center;
+    font-size: 14px;
+    padding: 10px 0; 
+}
+.box-week > div:nth-child(6),
+.box-week > div:nth-child(7) {
+    color: rgb(249, 45, 47);
+}
+.box-date {
+    display: -webkit-box;
+    display: box;
+    border-bottom: 1px solid rgb(200, 200, 200);
+}
+.box-date:last-child {
+    border-bottom: none;
+}
+.date {
+    width: 100%;
+    -webkit-box-flex:1.0;
+    box-flex:1.0;
+    text-align: center;
+    font-size: 14px;
+    padding: 5px 0; 
+    border-left: 1px solid #fff;
+}
+.date:first-child {
+    border-left: none;
+}
+.date:nth-child(6) .date-num,
+.date:nth-child(7) .date-num {
+    color: rgb(249, 45, 47);
+}
+
+.date-pn{
+    width: 100%;
+    -webkit-box-flex:1.0;
+    box-flex:1.0;
+    text-align: center;
+    font-size: 14px;
+    padding: 5px 0; 
+    border-left: 1px solid #fff;
+    background-color: rgb(240, 240, 240);
+}
+
+.date-num {
+    font-weight: 700;
+    color: #000;
+}
+.date-ch {
+    font-size: 12px;
+    color: rgb(200, 200, 200);
+    white-space: nowrap;
+}
+.date-work {
+    background-color: rgb(240, 240, 240);
+    position: relative;
+}
+.date-work .date-num {
+    color: rgb(200, 200, 200) !important;
+}
+
+.date-pn .date-num {
+    color: rgb(200, 200, 200) !important;
+}
+
+
+.date-work:after {
+    content: '班';
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: #fff;
+    padding: 1px 2px;
+    background-color: rgb(200, 200, 200);
+    font-size: 12px;
+}
+.date-free {
+    background-color: rgb(255, 236, 236);
+    position: relative;
+}
+.date-free:after {
+    content: '休';
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: #fff;
+    padding: 1px 2px;
+    background-color: rgb(249, 45, 47);
+    font-size: 12px;
+}
+.date-fest .date-ch {
+    color: rgb(249, 45, 47);
+}
+
+
+.date-today,
+.date:hover {
+    background-color: rgb(252, 173, 35);
+    position: relative;
+}
+.date-pn:hover .date-num,
+.date-today .date-num,
+.date-today .date-ch,
+.date:hover .date-num,
+.date:hover .date-ch {
+    color: #fff !important;
+}
+</style>
+    <div class="container" id="container">
+        <div class="box-detail">
+            <div class="input-item input-button">
+                <input type="button" id="addsomeevent" value="添加事件" />
+            </div>
+            <div class="detail-date" id="right_detail_date"></div>
+            <div class="detail-num" id="right_detail_date_num"></div>
+            <div class="detail-des" id="right_detail_date_lunar"></div>
+            <div class="detail-prefer">
+                <div>
+                    <div class="detail-prefer-title">宜</div>
+                    <ul>
+                        <li>约</li>
+                        
+                    </ul>
+                </div>
+                <div>
+                    <div class="detail-prefer-title">忌</div>
+                    <ul>
+                        <li>禁欲</li>
+                        <li>禁欲</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="box-title">
+            <div class="input-item input-select">
+                <select id="sel_year" ></select>
+                <div></div>
+            </div>
+            <div class="input-item input-select">
+                <select id="sel_month" >
+                    <option value="0">1月</option>
+                    <option value="1">2月</option>
+                    <option value="2">3月</option>
+                    <option value="3">4月</option>
+                    <option value="4">5月</option>
+                    <option value="5">6月</option>
+                    <option value="6">7月</option>
+                    <option value="7">8月</option>
+                    <option value="8">9月</option>
+                    <option value="9">10月</option>
+                    <option value="10">11月</option>
+                    <option value="11">12月</option>
+                </select>
+            </div>
+                <!--<div class="input-item input-select">
+                    <select>
+                        <option value="holiday">假期</option>
+                        <option value="festival">节日</option>
+                    </select>
+                </div>-->
+            <div class="input-item input-button">
+                <input type="button" id="back2today" value="返回今天" />
+            </div>
+        </div>
+        <div class="box-week" id="week_title">
+            <div>一</div>
+            <div>二</div>
+            <div>三</div>
+            <div>四</div>
+            <div>五</div>
+            <div>六</div>
+            <div>日</div>
+        </div>
+        <div id="week_detail">
+        </div>
+    </div>
+    <div id="overlay" style="display: none;">
+      
+
+        <div id="child-lay" style="width: 90%; margin: auto; position: absolute; top: 0; left: 0; bottom: 0; right: 0;  background-color: rgb(240, 240, 240);">
+        <table style="width:100%;border:1px solid red">
+          <tr>
+            <td>
+              <input type="text" id="event_title" placeholder="提醒你啥么？">
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <input type="text" id="event_year" value="" />年
+              <input type="text" id="event_month" value="" />月
+              <input type="text" id="event_day" value="" />日
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <label for="event_yl">
+                <input type="radio" id="event_yl" value="1" />阳历
+              </label>
+              <label for="event_nl">
+                <input type="radio" id="event_nl" value="2" />农历
+              </label>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <input type="checkbox" id="event_repeat" value="" />重复提醒
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <input type="button" id="event_ok" value="设 置 OK" />
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+  <script src="js/jquery.min.js"></script>
+  <script src="js/calendar.js"></script>

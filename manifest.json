@@ -1,0 +1,26 @@
+{  
+  "name": "日历",  
+  "version": "0.1",  
+  "manifest_version": 11,  
+  "description": "日历",
+
+  "browser_action": {  
+    "default_icon": "css/icon.png" ,
+    "default_title": "日历",
+    "default_popup": "calendar.html"
+  },
+  "background":{
+    "scripts":["js/jquery.min.js"]
+  },
+  "permissions": [  
+    "http://*/*",  
+    "tabs"  
+   ],  
+   "content_scripts": [  
+    {  
+      "matches": ["http://*/*","https://*/*"],  
+      "js": ["js/run.js"],
+      "run_at":"document_end"
+    }  
+  ]
+}  
