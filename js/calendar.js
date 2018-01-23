@@ -539,9 +539,7 @@
           $("#sel_year").append('<option value="'+i+'">'+i+'年</option>');
         }
 
-        $("#addsomeevent").click(function(){
-
-        });
+        
 
         $('#sel_year').change(function (){
             _calendar_changesel();
@@ -552,6 +550,34 @@
 
         $('#back2today').click(function(){
             inittoday();
+        });
+        $('#pre_month').click(function(){
+            var y = $('#sel_year').val();
+            var m = $('#sel_month').val();
+            m = ( m - 1) ;
+            if(m==-1){
+              m = 11;
+            }
+            if(m==11){
+              y = y - 1;
+            }
+
+            $('#sel_year').val(y);
+            $('#sel_month').val(m);
+
+            _calendar_change_month(y,m);
+        });
+        $('#next_month').click(function(){
+            var y = $('#sel_year').val();
+            var m = $('#sel_month').val();
+            m = (m-(-1)) % 12;
+            if(m==0){
+              y = y - (-1);
+            }
+            $('#sel_year').val(y);
+            $('#sel_month').val(m);
+            _calendar_change_month(y,m);
+
         });
 
         $('#week_detail').on('click', '.date', function () {
@@ -587,6 +613,13 @@
         var m = $('#sel_month').val();
         var d = sd || -1;
         return drawdaylist(y, m, d);
+    }
+    //选择年 选择月  这个月份都是 -1 的
+    function _calendar_change_month(sy,sm,sd){
+        var d = sd || -1;
+
+        console.log('Change-Month:', sy,sm,d);
+        drawdaylist(sy, sm, d);
     }
 
     //打印log
@@ -644,8 +677,6 @@
                 "d":dd.getDate(),
                 "current":0
             };
-
-            //log(1,"y:"+dd.getFullYear()+" m:"+dd.getMonth()+" d:"+dd.getDate());
         }
         /*** 补充中间 end***/
 
@@ -681,9 +712,7 @@
             var tmp = '<div id="daylist'+i+'" class="';
 
             if(alldays[i].current!=0){
-
                 tmp+= ' date date-pn';
-
             }else{
                 tmp+=' date';
             }
@@ -718,8 +747,8 @@
           tmp.data('month', alldays[i].m);
           tmp.data('date', alldays[i].d);
           tmp.data('current', alldays[i].current);
-          console.log('Insert:', alldays[i].y,alldays[i].m,alldays[i].d);
-          console.log('Compare:', SY,SM + 1,SD);
+          //console.log('Insert:', alldays[i].y,alldays[i].m,alldays[i].d);
+          //console.log('Compare:', SY,SM + 1,SD);
           if (alldays[i].y === SY &&
               alldays[i].m === (SM + 1) &&
               alldays[i].d === SD) {
